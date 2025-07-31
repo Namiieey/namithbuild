@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Namith | Editor | Developer | Music</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --accent: #6f7bfd;
+      --gradient-bg: linear-gradient(135deg, #2d3950 0%, #7b8bf5 100%);
+      --glass-bg: rgba(36,54,89,0.28);
+      --glass-border: rgba(255,255,255, 0.50);
+      --glass-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+    }
+    body {
+      min-height: 100vh;
+      background: var(--gradient-bg);
+      margin: 0;
+      padding: 0; 
+      font-family: 'Inter', 'Fira Mono', sans-serif;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+    }
+    .glass-card {
+      background: var(--glass-bg);
+      border-radius: 2.3rem;
+      border: 1.7px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      backdrop-filter: blur(28px) saturate(1.7);
+      -webkit-backdrop-filter: blur(28px) saturate(1.7);
+      padding: 3.2rem 2.5rem 2.6rem 2.5rem;
+      display: flex; flex-direction: column; align-items: center;
+      max-width: 98vw;
+      transition: box-shadow 0.2s;
+      position: relative;
+    }
+    .glass-card::after {
+      content: "";
+      position: absolute;
+      bottom: 24px; right: 24px;
+      width: 88px; height: 38px;
+      background: radial-gradient(circle at 40% 30%, #fff6 30%, transparent 100%);
+      opacity: 0.7; filter: blur(10px);
+      pointer-events: none;
+      border-radius: 38px;
+    }
+    .typing {
+      font-size: 2.7rem;
+      font-weight: 700;
+      color: #fff;
+      white-space: nowrap;
+      border-right: 4px solid var(--accent);
+      margin-bottom: 2.1rem; min-height: 3.2rem;
+      animation: blink-caret 0.7s steps(1) infinite;
+      filter: drop-shadow(0 1.5px 14px #556fff18);
+    }
+    @keyframes blink-caret { from, to {border-color: transparent;} 50%{border-color:var(--accent);} }
+    .hidden { display: none; }
+    .download-button {
+      background: var(--glass-bg);
+      color: #eaf2fa;
+      border: 1.7px solid var(--glass-border);
+      border-radius: 2.5rem;
+      font-size: 1.17rem;
+      font-weight: 600;
+      padding: 1.07rem 2.7rem;
+      margin-top: 1.5rem;
+      cursor: pointer;
+      box-shadow: 0 2px 16px 0 rgba(82,108,255,0.12);
+      backdrop-filter: blur(12px);
+      transition: background 0.18s, color 0.13s;
+    }
+    .download-button:hover {
+      background: rgba(111,123,253, 0.25);
+      color: #fff;
+      border-color: #97a7ffb6;
+    }
+    @media (max-width: 600px) {
+      .typing { font-size: 1.5rem; }
+      .glass-card { padding: 2rem 1rem 1.8rem 1rem; }
+    }
+    /* Vibrant background shapes */
+    .bg-shape1, .bg-shape2 {
+      position: absolute; z-index: -1;
+      border-radius: 50%;
+      filter: blur(48px) opacity(0.48);
+    }
+    .bg-shape1 {
+      width: 420px; height: 260px;
+      top: 8vh; left: 18vw;
+      background: radial-gradient(circle, #6f7bfd 55%, #aaf0fd 100%);
+    }
+    .bg-shape2 {
+      width: 320px; height: 170px;
+      bottom: 16vh; right: 14vw;
+      background: radial-gradient(circle, #fc7bea 60%, #ffd6e0 100%);
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-shape1"></div>
+  <div class="bg-shape2"></div>
+  <main class="glass-card">
+    <div class="typing" id="typing"></div>
+    <button id="downloadBtn" class="download-button hidden">⬇️ Download File</button>
+  </main>
+  <script>
+    const text = "Namith | Editor | Developer | Music.";
+    const typingDiv = document.getElementById('typing');
+    const downloadBtn = document.getElementById('downloadBtn');
+    let idx = 0, typingDelay = 77;
+
+    function typeWriter() {
+      if (idx <= text.length) {
+        typingDiv.textContent = text.slice(0, idx);
+        idx++;
+        setTimeout(typeWriter, typingDelay);
+      } else {
+        setTimeout(() => downloadBtn.classList.remove('hidden'), 400);
+      }
+    }
+    downloadBtn.onclick = function() {
+      window.open("https://drive.usercontent.google.com/download?id=1uryYcHLwFJ08F27y7mJiGbiljjMvhazT&export=download&authuser=0&confirm=t&uuid=64e484b8-9a07-472b-8dbc-64743849a3fd&at=AN8xHop5fHe1RDpho6-Zmt1hC5gC:1753937405596", "_blank");
+    }
+    window.onload = typeWriter;
+  </script>
+</body>
+</html>
